@@ -3,17 +3,20 @@
 {
 	"name": "PowerShell",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/powershell:lts-debian-11",
+	"image": "mcr.microsoft.com/devcontainers/base:dev-noble",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": "true",
 			"username": "vscode",
 			"upgradePackages": "false",
 			"nonFreePackages": "true"
+		},
+		"ghcr.io/devcontainers-contrib/features/powershell:1": {
+			"version": "latest"
 		}
 	},
 
-	"postCreateCommand": "sudo chsh vscode -s \"$(which pwsh)\"",
+	"postCreateCommand": "sudo chmod 755 /opt/microsoft/powershell/7/pwsh;sudo chsh vscode -s \"$(which pwsh)\"",
 
 	// Configure tool-specific properties.
 	"customizations": {
