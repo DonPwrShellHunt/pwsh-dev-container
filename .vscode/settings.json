@@ -1,0 +1,5 @@
+{
+    "powershell.powerShellAdditionalExePaths": {
+        "local-bin": "/usr/local/bin/pwsh"
+    }
+}
