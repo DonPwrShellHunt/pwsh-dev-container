@@ -11,7 +11,7 @@
 			"upgradePackages": "false",
 			"nonFreePackages": "true"
 		},
-		"ghcr.io/devcontainers-contrib/features/powershell:1": {
+		"ghcr.io/devcontainers/features/powershell:1": {
 			"version": "latest"
 		}
 	},
