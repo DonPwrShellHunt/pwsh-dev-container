@@ -10,3 +10,7 @@ Image was `mcr.microsoft.com/powershell:lts-debian-11`. From my previous researc
 ## Modifications after initial settings
 
 Use a devcontainer/base:dev-noble image and tweak it to run as the vscode remoteuser.
+
+The base:dev-noble images did change the architecture to ARM (expected), but it also installed  7.5.0-preview.3 (unexpected). The vscode user was also used as the remoteuser and it had a UID/GID of 1001 (also expected from looking at history in devcontainer repo).
+
+Next I'll change back to just noble rather than dev-noble and see what happens.
