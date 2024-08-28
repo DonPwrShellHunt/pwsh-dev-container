@@ -16,7 +16,7 @@
 		}
 	},
 
-	"postCreateCommand": "sudo chmod 755 /opt/microsoft/powershell/7/pwsh;sudo chsh vscode -s \"$(which pwsh)\"",
+	"postCreateCommand": "sudo chsh vscode -s \"$(which pwsh)\"",
 
 	// Configure tool-specific properties.
 	"customizations": {
