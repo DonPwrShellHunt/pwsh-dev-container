@@ -1,5 +1,6 @@
 {
     "powershell.powerShellAdditionalExePaths": {
+        "usr-bin": "/usr/bin/pwsh",
         "local-bin": "/usr/local/bin/pwsh"
     },
     "workbench.colorCustomizations": {
