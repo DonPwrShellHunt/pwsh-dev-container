@@ -16,3 +16,7 @@ The base:dev-noble images did change the architecture to ARM (expected), but it 
 Next I'll change back to just noble rather than dev-noble and see what happens.
 
 The unexpected preview version of PowerShell came from devcontainers-contrib. Once I changed it the standard version the stable version of pwsh 7.4.4 was installed.
+
+## Permission Denied with pwsh terminal type
+
+If I create a new zsh terminal, and then type pwsh, I get into pwsh ok.
