@@ -8,8 +8,8 @@
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": "true",
 			"username": "vscode",
-			"upgradePackages": "false",
-			"nonFreePackages": "true"
+			"upgradePackages": "true",
+			"nonFreePackages": "false"
 		},
 		"ghcr.io/devcontainers/features/powershell:1": {
 			"version": "latest"
