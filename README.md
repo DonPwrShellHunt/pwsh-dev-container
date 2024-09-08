@@ -24,3 +24,11 @@ If I create a new zsh terminal, and then type pwsh, I get into pwsh ok.
 ## examine base:noble image
 
 How is dotnet tool pwsh installed? Appears to be 'local', which may mean it is installed independent of a particular user (vscode). When I installed powershell as vscode user and --global flag, the software was put under /home/vscode/.dotnet/tools if I remember correctly.
+
+Ok - dotnet installs are a little bizarre. The following info was found [here](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools)
+
+The --global flag causes a tool to default install path to $HOME/.dotnet/tools and tool access is user-specific, not machine global. WTF! Really misleading terminology!
+
+The --tool-path <path> option of dotnet tool install will place the tool in that specified directory, but it will be subject to PATH contents to locate executable.
+
+The --local flag contrains access to a subtree of directories and requires a tool manifest file, typically dotnet-tools.json
