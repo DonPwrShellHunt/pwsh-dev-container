@@ -20,3 +20,7 @@ The unexpected preview version of PowerShell came from devcontainers-contrib. On
 ## Permission Denied with pwsh terminal type
 
 If I create a new zsh terminal, and then type pwsh, I get into pwsh ok.
+
+## examine base:noble image
+
+How is dotnet tool pwsh installed? Appears to be 'local', which may mean it is installed independent of a particular user (vscode). When I installed powershell as vscode user and --global flag, the software was put under /home/vscode/.dotnet/tools if I remember correctly.
