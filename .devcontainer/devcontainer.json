@@ -3,7 +3,7 @@
 {
 	"name": "PowerShell",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/dotnet:8.0-noble",
+	"image": "mcr.microsoft.com/devcontainers/dotnet:dev-8.0-noble",
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"installZsh": "true",
@@ -32,11 +32,12 @@
 				"ms-vscode.powershell"
 			]
 		}
-	}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
+	"remoteEnv": {"PATH":"/usr/share/powershell:${containerEnv:PATH}"}
 }
