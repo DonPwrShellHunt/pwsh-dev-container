@@ -33,7 +33,6 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-vscode.powershell",
-				"ms-azuretools.vscode-containers",
 				"mhutchie.git-graph",
 				"DavidAnson.vscode-markdownlint"
 			]
