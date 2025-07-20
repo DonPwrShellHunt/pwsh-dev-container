@@ -1,4 +1,5 @@
 # pwsh-dev-container
+
 Experimenting with vscode devcontainer and pwsh
 
 ## VSCode create dev container in volume for PowerShell
@@ -25,11 +26,11 @@ If I create a new zsh terminal, and then type pwsh, I get into pwsh ok.
 
 How is dotnet tool pwsh installed? Appears to be 'local', which may mean it is installed independent of a particular user (vscode). When I installed powershell as vscode user and --global flag, the software was put under /home/vscode/.dotnet/tools if I remember correctly.
 
-Ok - dotnet installs are a little bizarre. The following info was found [here](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools)
+Ok - dotnet installs are a little bizarre. The following info was found on [learn site](https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools)
 
 The --global flag causes a tool to default install path to $HOME/.dotnet/tools and tool access is user-specific, not machine global. WTF! Really misleading terminology!
 
-The --tool-path <path> option of dotnet tool install will place the tool in that specified directory, but it will be subject to PATH contents to locate executable.
+The --tool-path PATH option of dotnet tool install will place the tool in that specified directory, but it will be subject to PATH contents to locate executable.
 
 The --local flag contrains access to a subtree of directories and requires a tool manifest file, typically dotnet-tools.json
 
@@ -38,3 +39,14 @@ The --local flag contrains access to a subtree of directories and requires a too
 Default vscode userUID is 1000 from mcr.microsoft.com/devcontainers/dotnet:9.0-noble, but it does have an app user defined as 1654. The description of this app user would seem to indicate that 1655 would be a better userUID for vscode, so that is what I decided to use for now (July 20,2025). I have already encountered losing access to a volume that was created with 1655, but subsequently was run with vscode set to 1000. Messy scenario that I do not totally understand - still!
 
 For now, I will try to maintain consistant use of 1655 and see what happens.
+
+```zsh
+$(which pwsh) | sudo tee -a /etc/shells
+```
+
+would add following string at end of this file
+`/usr/share/powershell/pwsh`
+
+Need to figure out how to add pwsh to shells AND set the vscode user shell to pwsh. Syntax may be tricky for multiple commands in string format.
+
+"postCreateCommand": "sudo chsh vscode -s \"$(which pwsh)\"",
