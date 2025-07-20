@@ -19,7 +19,7 @@
 		}
 	},
 
-	"postCreateCommand": "sudo chsh vscode -s \"$(which pwsh)\"",
+	"postCreateCommand": "command -v pwsh | sudo tee -a /etc/shells && sudo chsh vscode -s \"$(command -v pwsh)\"",
 
 	// Configure tool-specific properties.
 	"customizations": {
