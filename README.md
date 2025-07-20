@@ -32,3 +32,9 @@ The --global flag causes a tool to default install path to $HOME/.dotnet/tools a
 The --tool-path <path> option of dotnet tool install will place the tool in that specified directory, but it will be subject to PATH contents to locate executable.
 
 The --local flag contrains access to a subtree of directories and requires a tool manifest file, typically dotnet-tools.json
+
+## Current work - rename later
+
+Default vscode userUID is 1000 from mcr.microsoft.com/devcontainers/dotnet:9.0-noble, but it does have an app user defined as 1654. The description of this app user would seem to indicate that 1655 would be a better userUID for vscode, so that is what I decided to use for now (July 20,2025). I have already encountered losing access to a volume that was created with 1655, but subsequently was run with vscode set to 1000. Messy scenario that I do not totally understand - still!
+
+For now, I will try to maintain consistant use of 1655 and see what happens.
