@@ -2,6 +2,15 @@
     "powershell.powerShellAdditionalExePaths": {
         "usr-bin": "/usr/bin/pwsh"
     },
+    "powershell.powerShellDefaultVersion": "usr-bin",
+    "terminal.integrated.profiles.linux": {
+        "pwsh": {
+            "path": "/usr/bin/pwsh",
+            "args": [],
+            "icon": "terminal-powershell"
+        }
+        },
+    "terminal.integrated.defaultProfile.linux": "pwsh",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#ff6433",
         "activityBar.background": "#ff6433",
@@ -21,6 +30,5 @@
         "titleBar.inactiveBackground": "#ff3d0099",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.remoteColor": "#ff3d00",
-    "powershell.powerShellDefaultVersion": "usr-bin"
+    "peacock.remoteColor": "#ff3d00"
 }
