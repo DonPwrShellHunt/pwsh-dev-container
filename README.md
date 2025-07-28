@@ -47,6 +47,6 @@ $(which pwsh) | sudo tee -a /etc/shells
 would add following string at end of this file
 `/usr/share/powershell/pwsh`
 
-Need to figure out how to add pwsh to shells AND set the vscode user shell to pwsh. Syntax may be tricky for multiple commands in string format.
+Need to figure out how to add pwsh to shells AND set the vscode user shell to pwsh. Syntax is tricky for multiple commands in string format.
 
-"postCreateCommand": "sudo chsh vscode -s \"$(which pwsh)\"",
+"postCreateCommand": "command -v pwsh | sudo tee -a /etc/shells && sudo chsh vscode -s \"$(command -v pwsh)\""
