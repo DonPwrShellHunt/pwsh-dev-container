@@ -50,3 +50,13 @@ would add following string at end of this file
 Need to figure out how to add pwsh to shells AND set the vscode user shell to pwsh. Syntax is tricky for multiple commands in string format.
 
 "postCreateCommand": "command -v pwsh | sudo tee -a /etc/shells && sudo chsh vscode -s \"$(command -v pwsh)\""
+
+## execvp permission denied Error
+
+Notice below that the dotnet instance of pwsh is not executable by everyone. This instance is being used to inject the shell integration into the terminal, but it fails with above error. To avoid this failure I disabled the shell integration in the settings.jason.
+
+```zsh
+$ find /usr/share/powershell -name "pwsh" -ls
+  2516434     76 -rwxr--r--   1 root     root        75208 Jun 18 21:54 /usr/share/powershell/.store/powershell.linux.arm64/7.5.2/powershell.linux.arm64/7.5.2/tools/net9.0/any/pwsh
+  2516622     76 -rwxr-xr-x   1 root     root        74808 Jul  8 18:21 /usr/share/powershell/pwsh
+```
