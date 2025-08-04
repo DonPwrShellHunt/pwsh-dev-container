@@ -2,6 +2,59 @@
 
 Experimenting with vscode devcontainer and pwsh
 
+## Dev Containers
+
+### Explore devcontainer dotnet:1-9.0-noble
+
+Layer 18 is install of powershell (not using devcontainer feature)
+
+```zsh
+RUN /bin/sh -c powershell_version=7.5.2 
+ && curl --fail --show-error --location --output PowerShell.Linux.arm64.$powershell_version.nupkg https://powershellinfraartifacts-gkhedzdeaghdezhr.z01.azurefd.net/tool/$powershell_version/PowerShell.Linux.arm64.$powershell_version.nupkg 
+ && powershell_sha512='93cd89c9a8cf5705fed968453815a76a28c54a8dbf363fbee1d4fc131125b68b2e1c1424c9cc66729503f2caa4cc2934be47dd775970bdb74c5a3d26ee88363c' 
+ && echo "$powershell_sha512  PowerShell.Linux.arm64.$powershell_version.nupkg" | sha512sum -c - 
+ && mkdir --parents /usr/share/powershell 
+ && dotnet tool install --add-source / --tool-path /usr/share/powershell --version $powershell_version PowerShell.Linux.arm64 
+ && dotnet nuget locals all --clear 
+ && rm PowerShell.Linux.arm64.$powershell_version.nupkg 
+ && ln -s /usr/share/powershell/pwsh /usr/bin/pwsh 
+ && chmod 755 /usr/share/powershell/pwsh 
+ && find /usr/share/powershell -print | grep -i '.*[.]nupkg$' | xargs rm # buildkit
+```
+
+Notice the output within the container shows
+
+* $PSHOME/pwsh is not executable within container
+* Given execute permission, $PSHOME/pwsh still fails in what appears to be non-arm64 references
+* $PSHOME/Modules is where the 7.5.2 powershell modules are located
+* Actual pwsh executable is /usr/share/powershell/pwsh (consistent with --tool-path of dotnet tool install)
+* Links point to this executable from /bin/pwsh and /usr/bin/pwsh
+* Without "terminal.integrated.shellIntegration.enabled": false, shell integration fails causing terminal launch issues
+
+```zsh
+> find /usr/share/powershell/ -name "pwsh" -ls
+  2516434  76 -rwxr--r--   1 root  root  75208 Jun 18 21:54 /usr/share/powershell/.store/powershell.linux.arm64/7.5.2/powershell.linux.arm64/7.5.2/tools/net9.0/any/pwsh
+  2516622  76 -rwxr-xr-x   1 root  root  74808 Jul  8 18:21 /usr/share/powershell/pwsh
+
+> $PSHOME
+/usr/share/powershell/.store/powershell.linux.arm64/7.5.2/powershell.linux.arm64/7.5.2/tools/net9.0/any
+
+PS /workspaces/pwsh-dev-container> (gps -Id $pid).Path
+/usr/share/powershell/pwsh
+
+PS /workspaces/pwsh-dev-container> which -a pwsh
+/usr/bin/pwsh
+/bin/pwsh
+
+PS /workspaces/pwsh-dev-container> ls -l /bin/pwsh /usr/bin/pwsh /usr/share/powershell/pwsh
+lrwxrwxrwx 1 root root    26 Jul  8 18:21 /bin/pwsh -> /usr/share/powershell/pwsh
+lrwxrwxrwx 1 root root    26 Jul  8 18:21 /usr/bin/pwsh -> /usr/share/powershell/pwsh
+-rwxr-xr-x 1 root root 74808 Jul  8 18:21 /usr/share/powershell/pwsh
+
+> sudo /usr/share/powershell/.store/powershell.linux.arm64/7.5.2/powershell.linux.arm64/7.5.2/tools/net9.0/any/pwsh --version
+rosetta error: failed to open elf at /lib64/ld-linux-x86-64.so.2
+```
+
 ## VSCode create dev container in volume for PowerShell
 
 Selected x86_64 container type despite running on M1 Mac.
@@ -34,7 +87,7 @@ The --tool-path PATH option of dotnet tool install will place the tool in that s
 
 The --local flag contrains access to a subtree of directories and requires a tool manifest file, typically dotnet-tools.json
 
-## Current work - rename later
+## UserUID Choice and pwsh as vscode login shell
 
 Default vscode userUID is 1000 from mcr.microsoft.com/devcontainers/dotnet:9.0-noble, but it does have an app user defined as 1654. The description of this app user would seem to indicate that 1655 would be a better userUID for vscode, so that is what I decided to use for now (July 20,2025). I have already encountered losing access to a volume that was created with 1655, but subsequently was run with vscode set to 1000. Messy scenario that I do not totally understand - still!
 
