@@ -8,9 +8,25 @@
             "path": "/usr/bin/pwsh",
             "args": [],
             "icon": "terminal-powershell"
-        }
         },
+        "auto-pwsh": {
+            "path": "/usr/bin/pwsh",
+            "args": [
+                "-NoLogo",
+                "-Interactive"
+            ],
+            "icon": "terminal-ubuntu"
+        }
+    },
     "terminal.integrated.defaultProfile.linux": "pwsh",
+    "terminal.integrated.automationProfile.linux": {
+        "path": "/usr/bin/pwsh",
+        "args": [
+            "-NoLogo",
+            "-Interactive"
+        ],
+        "icon": "terminal-ubuntu"
+    },
     "terminal.integrated.shellIntegration.enabled": false,
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#ff6433",
