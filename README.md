@@ -4,6 +4,24 @@ Experimenting with vscode devcontainer and pwsh
 
 ## Dev Containers
 
+### Updated devcontainer to dotnet:9.0-noble
+
+```zsh
+W: GPG error: https://dl.yarnpkg.com/debian stable InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 62D54FD4003F6525
+
+E: The repository 'https://dl.yarnpkg.com/debian stable InRelease' is not signed.
+
+ERROR: Feature "Common Utilities" (ghcr.io/devcontainers/features/common-utils) failed to install! Look at the documentation at https://github.com/devcontainers/features/tree/main/src/common-utils for help troubleshooting this error.
+```
+
+```zsh
+To fix the yarnpkg error above, I had to find a more recently created image, which ended up
+being dotnet:9.0-noble
+
+There are an entire set of images with the following sha256.
+sha256:faabbd9a48dae5b9d2b907ca251391c4810272ffcb128a1153a3a2849df3bac7
+```
+
 ### Explore devcontainer dotnet:1-9.0-noble
 
 Layer 18 is install of powershell (not using devcontainer feature)
